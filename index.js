@@ -66,5 +66,14 @@ delete_btn.addEventListener("click", (e) => {
 
 //calculate result
 btn_caculate.addEventListener("click", (e) => {
-  btn_output.textContent = eval(btn_output.textContent);
+  if (
+    operator_arr.includes(
+      btn_output.textContent[btn_output.textContent.length - 1]
+    )
+  ) {
+    audio_err.play();
+    alert("you can not place operator the end");
+  } else {
+    btn_output.textContent = eval(btn_output.textContent);
+  }
 });
