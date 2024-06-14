@@ -1,0 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Delius+Unicase:wght@400;700&family=Inter:wght@100..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #3b4664;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.cal-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+  background-color: #252d44;
+  width: 424px;
+  height: 396px;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  padding: 30px;
+  font-size: 19px;
+  border-radius: 12px;
+}
+
+.cal-buttons div {
+  background-color: #eae3db;
+  color: #3b4664;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 800;
+  transition: all 0.3s ease-in-out;
+}
+
+.cal-buttons div:hover {
+  background-color: rgb(203, 203, 203);
+  cursor: pointer;
+}
+
+.btn_caculate {
+  grid-column: span 2;
+}
+.btn_reset {
+  grid-column: span 2;
+}
+.col_grey {
+  background-color: #647299 !important;
+  color: white !important;
+}
+.col_grey:hover {
+  background-color: whitesmoke !important;
+  color: #647299 !important;
+}
+
+.col_red {
+  background-color: #d13f30 !important;
+  color: white !important;
+}
+.col_red:hover {
+  background-color: whitesmoke !important;
+  color: #d13f30 !important;
+}
+
+.cal-output {
+  box-shadow: 0px 4px 4px 0px #00000040;
+  background-color: #181f32;
+
+  width: 424px;
+  color: white;
+  height: 100px;
+  margin-bottom: 11px;
+  border-radius: 10px;
+  padding: 30px;
+  text-align: right;
+  font-size: 32px;
+  font-weight: 700;
+  overflow-y: hidden;
+  overflow-x: overlay;
+}
+
+.cal-output::-webkit-scrollbar {
+  background-color: transparent;
+  height: 5px;
+}
+
+.cal-output::-webkit-scrollbar-thumb {
+  background-color: #323849;
+  border-radius: 5px;
+}
+.cal-output::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+audio {
+  display: none;
+}
