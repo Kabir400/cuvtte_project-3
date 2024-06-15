@@ -49,6 +49,8 @@ btn_minus.addEventListener("click", (e) => {
   ) {
     audio_err.play();
     alert("you can't add two operator one by one");
+  } else if (btn_output.textContent[btn_output.textContent.length - 1] == "-") {
+    btn_output.textContent = btn_output.textContent.slice(0, -1) + "+";
   } else {
     btn_output.textContent += btn_minus.textContent;
   }
@@ -61,7 +63,11 @@ btn_reset.addEventListener("click", (e) => {
 
 //delete
 delete_btn.addEventListener("click", (e) => {
-  btn_output.textContent = btn_output.textContent.slice(0, -1);
+  if (btn_output.textContent == "Infinity") {
+    btn_output.textContent = "";
+  } else {
+    btn_output.textContent = btn_output.textContent.slice(0, -1);
+  }
 });
 
 //calculate result
