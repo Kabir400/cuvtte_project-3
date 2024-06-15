@@ -5,10 +5,12 @@ const btn_minus = document.querySelector(".btn_minus");
 const btn_reset = document.querySelector(".btn_reset");
 const delete_btn = document.querySelector(".btn_del");
 const btn_caculate = document.querySelector(".btn_caculate");
+const btn_point = document.querySelector(".btn_point");
 
 const audio_err = document.querySelector(".audio_err");
 
 const operator_arr = ["+", "*", "/", "-"];
+let point = 0;
 
 //inpuing numbers
 btn_num.forEach((ele, index) => {
@@ -33,6 +35,7 @@ btn_operator.forEach((ele) => {
       alert("you can't add two operator one by one");
     } else {
       btn_output.textContent += ele.textContent;
+      point = 0;
     }
   });
 });
@@ -51,14 +54,17 @@ btn_minus.addEventListener("click", (e) => {
     alert("you can't add two operator one by one");
   } else if (btn_output.textContent[btn_output.textContent.length - 1] == "-") {
     btn_output.textContent = btn_output.textContent.slice(0, -1) + "+";
+    point = 0;
   } else {
     btn_output.textContent += btn_minus.textContent;
+    point = 0;
   }
 });
 
 //clear all
 btn_reset.addEventListener("click", (e) => {
   btn_output.textContent = "";
+  point = 0;
 });
 
 //delete
@@ -66,7 +72,18 @@ delete_btn.addEventListener("click", (e) => {
   if (btn_output.textContent == "Infinity") {
     btn_output.textContent = "";
   } else {
+    if (btn_output.textContent[btn_output.textContent.length - 1] == ".") {
+      point = 0;
+    }
     btn_output.textContent = btn_output.textContent.slice(0, -1);
+  }
+});
+
+//entreing point--
+btn_point.addEventListener("click", (e) => {
+  if (point < 1) {
+    btn_output.textContent += ".";
+    point++;
   }
 });
 
@@ -79,6 +96,10 @@ btn_caculate.addEventListener("click", (e) => {
   ) {
     audio_err.play();
     alert("you can not place operator the end");
+  } else if (isNaN(eval(btn_output.textContent))) {
+    btn_output.textContent = "Infinity";
+    // } else if (btn_output.textContent == "") {
+    //   //do nothing
   } else {
     btn_output.textContent = eval(btn_output.textContent);
   }
