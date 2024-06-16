@@ -10,6 +10,7 @@ const btn_point = document.querySelector(".btn_point");
 const audio_err = document.querySelector(".audio_err");
 
 const operator_arr = ["+", "*", "/", "-"];
+const number_arr = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 let point = 0;
 
 //inpuing numbers
@@ -33,6 +34,14 @@ btn_operator.forEach((ele) => {
     ) {
       audio_err.play();
       alert("you can't add two operator one by one");
+    } else if (
+      btn_output.textContent[btn_output.textContent.length - 1] == "." &&
+      !number_arr.includes(
+        btn_output.textContent[btn_output.textContent.length - 2]
+      )
+    ) {
+      alert("Entre a valid number");
+      audio_err.play();
     } else {
       btn_output.textContent += ele.textContent;
       point = 0;
@@ -55,6 +64,14 @@ btn_minus.addEventListener("click", (e) => {
   } else if (btn_output.textContent[btn_output.textContent.length - 1] == "-") {
     btn_output.textContent = btn_output.textContent.slice(0, -1) + "+";
     point = 0;
+  } else if (
+    btn_output.textContent[btn_output.textContent.length - 1] == "." &&
+    !number_arr.includes(
+      btn_output.textContent[btn_output.textContent.length - 2]
+    )
+  ) {
+    alert("Entre a valid number");
+    audio_err.play();
   } else {
     btn_output.textContent += btn_minus.textContent;
     point = 0;
@@ -90,17 +107,38 @@ btn_point.addEventListener("click", (e) => {
 //calculate result
 btn_caculate.addEventListener("click", (e) => {
   if (
+    btn_output.textContent[btn_output.textContent.length - 1] == "." &&
+    !number_arr.includes(
+      btn_output.textContent[btn_output.textContent.length - 2]
+    )
+  ) {
+    alert("Entre a valid number");
+    audio_err.play();
+    return;
+  }
+
+  let res = String(eval(btn_output.textContent));
+
+  if (res.includes(".")) {
+    point = 1;
+  } else {
+    point = 0;
+  }
+
+  if (
     operator_arr.includes(
       btn_output.textContent[btn_output.textContent.length - 1]
     )
   ) {
     audio_err.play();
     alert("you can not place operator the end");
-  } else if (isNaN(eval(btn_output.textContent))) {
+  } else if (Number.isNaN(res)) {
     btn_output.textContent = "Infinity";
-    // } else if (btn_output.textContent == "") {
-    //   //do nothing
+    console.log("infinite block runs");
+  } else if (res == "undefined") {
+    alert("you can't calculate on a black string");
+    audio_err.play();
   } else {
-    btn_output.textContent = eval(btn_output.textContent);
+    btn_output.textContent = res;
   }
 });
